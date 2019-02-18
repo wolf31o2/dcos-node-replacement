@@ -116,9 +116,11 @@ function main() {
     # Wait for agent registration
     runscript "dcos_sanity_check.sh agent_snapshot" || die "Failed polling for agent_snapshot"
     # HDFS
-    decho "Replacing HDFS pods (if necessary)"
-    runscript "dcos_hdfs.sh" 3600 || die "Failed to replace HDFS pods"
-    decho
+    # decho "Replacing HDFS pods (if necessary)"
+    # runscript "dcos_hdfs.sh" 3600 || die "Failed to replace HDFS pods"
+    # decho
+    decho "MANUAL: Verify and move HDFS pods, then press any key to continue"
+    read -n1 -p "Press any key to continue" __key
     decho "[x] Zone ${__zone} completed"
     decho
   done
