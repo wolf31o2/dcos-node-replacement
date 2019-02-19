@@ -115,6 +115,10 @@ function main() {
     runscript "dcos_wait_for.sh agent ${__orig_num_agents}" || die "Failed waiting for ${__orig_num_agents} to rejoin cluster"
     # Wait for agent registration
     runscript "dcos_sanity_check.sh agent_snapshot" || die "Failed polling for agent_snapshot"
+    # HDFS
+    decho "Replacing HDFS pods (if necessary)"
+    runscript "dcos_hdfs.sh" 3600 || die "Failed to replace HDFS pods"
+    decho
     decho "[x] Zone ${__zone} completed"
     decho
   done
